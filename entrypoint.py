@@ -1,7 +1,6 @@
 # import the flask web framework
-from flask import Flask
 import json
-import redis as redis
+import redis
 from flask import Flask, request
 from loguru import logger
 
