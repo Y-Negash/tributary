@@ -23,6 +23,10 @@ def record_engine_temperature():
     database.lpush(DATA_KEY, engine_temperature)
     logger.info(f"stashed engine temperature in redis: {engine_temperature}")
 
+# finds most recent engine temperature reading in database
+    current_engine_temperature = database.lindex(DATA_KEY, 0)
+    logger.info(f"current engine temperature is: {current_engine_temperature}")
+
     while database.llen(DATA_KEY) > HISTORY_LENGTH:
         database.rpop(DATA_KEY)
     engine_temperature_values = database.lrange(DATA_KEY, 0, -1)
